@@ -682,6 +682,7 @@ require('lazy').setup({
       -- See `:help cmp`
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
+      local defaults = require 'cmp.config.default'()
       luasnip.config.setup {}
 
       cmp.setup {
@@ -736,6 +737,12 @@ require('lazy').setup({
           { name = 'luasnip' },
           { name = 'path' },
         },
+        experimental = {
+          ghost_text = {
+            hl_group = 'CmpGhostText',
+          },
+        },
+        sorting = defaults.sorting,
       }
     end,
   },
@@ -807,7 +814,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'html', 'lua', 'markdown', 'vim', 'vimdoc', 'javascript', 'typescript' },
+      ensure_installed = { 'bash', 'c', 'html', 'lua', 'markdown', 'vim', 'vimdoc' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = { enable = true },

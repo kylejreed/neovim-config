@@ -84,7 +84,7 @@ map('v', 'K', ":m '<-2<CR>gv=gv")
 map('v', 'H', '^')
 map('v', 'L', '$h')
 map('n', '<leader>rel', ':set rnu! <CR>')
-map('n', '<leader>q', ':q! <CR>')
+map('n', '<leader>qq', ':q! <CR>')
 map('n', '<Esc>', ':noh <CR>', { silent = true })
 map('i', 'jk', '<Esc>', { silent = true })
 
@@ -656,25 +656,6 @@ require('lazy').setup({
       }
     end,
   },
-
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`
-    'folke/tokyonight.nvim',
-    priority = 1000, -- make sure to load this before all the other start plugins
-    init = function()
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
-
-      -- You can configure highlights by doing something like
-      vim.cmd.hi 'Comment gui=none'
-    end,
-  },
-
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 

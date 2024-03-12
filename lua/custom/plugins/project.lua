@@ -1,6 +1,8 @@
 return {
   {
     'ahmedkhalf/project.nvim',
+    lazy = false,
+    priority = 100,
     opts = {
       base_dirs = { '~/Documents' },
     },

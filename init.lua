@@ -8,6 +8,10 @@ vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
+vim.opt.tabstop = 4
+vim.opt.expandtab = true
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
 
 -- Make line numbers default
 vim.opt.number = true
@@ -72,7 +76,7 @@ map('n', '<F5>', ':e! <CR>', { silent = true })
 map('n', '<leader>gg', ':LazyGit <CR>')
 map('n', 'H', '^')
 map('n', 'L', '$')
-map('n', '<C-s>', ':wa <CR>')
+map('n', '<C-s>', ':w! <CR>')
 map('i', '<C-s>', '<Esc> :wa <CR>')
 map('i', '<C-h>', '<Left>', { silent = true, noremap = true })
 map('i', '<C-l>', '<Right>', { silent = true, noremap = true })

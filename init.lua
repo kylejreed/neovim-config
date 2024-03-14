@@ -73,7 +73,7 @@ local map = function(mode, keys, func, opts)
 end
 
 map('n', '<leader>x', ':bd! <CR>')
-map('n', '<leader>|', '<C-w> <C-v>', { silent = true })
+map('n', '<leader>|', ':vsplit <CR>')
 map('n', '<F5>', ':e! <CR>', { silent = true })
 map('n', '<leader>gg', ':LazyGit <CR>')
 map('n', 'H', '^')

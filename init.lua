@@ -93,6 +93,7 @@ map('n', '<leader>rel', ':set rnu! <CR>')
 map('n', '<leader>qq', ':q! <CR>')
 map('n', '<Esc>', ':noh <CR>', { silent = true })
 map('i', 'jk', '<Esc>', { silent = true })
+map('n', '~', ':Inspect <CR>', { desc = 'Inspect' })
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
@@ -215,28 +216,27 @@ require('lazy').setup({
         end, { expr = true, desc = 'Previous Hunk' })
 
         -- Actions
-        map('n', '<leader>ghs', gs.stage_hunk)
-        map('n', '<leader>ghr', gs.reset_hunk)
+        map('n', '<leader>ghs', gs.stage_hunk, { desc = 'Stage Hunk' })
+        map('n', '<leader>ghr', gs.reset_hunk, { desc = 'Reset Hunk' })
         map('v', '<leader>ghs', function()
           gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
         end)
         map('v', '<leader>ghr', function()
           gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
         end)
-        map('n', '<leader>ghS', gs.stage_buffer)
-        map('n', '<leader>ghu', gs.undo_stage_hunk)
-        map('n', '<leader>ghR', gs.reset_buffer)
+        map('n', '<leader>ghS', gs.stage_buffer, { desc = 'Stage Buffer' })
+        map('n', '<leader>ghu', gs.undo_stage_hunk, { desc = 'Undo Hunk' })
+        map('n', '<leader>ghR', gs.reset_buffer, { desc = 'Reset Buffer' })
         map('n', '<leader>ghp', gs.preview_hunk)
         map('n', '<leader>ghb', function()
           gs.blame_line { full = true }
         end)
-        map('n', '<leader>gtb', gs.toggle_current_line_blame)
+        map('n', '<leader>ghb', gs.toggle_current_line_blame, { desc = 'Blame Hunk' })
         map('n', '<leader>ghd', gs.diffthis)
         map('n', '<leader>ghD', function()
           gs.diffthis '~'
         end)
         map('n', '<leader>gtd', gs.toggle_deleted)
-
         -- Text object
         map({ 'o', 'x' }, 'gih', ':<C-U>Gitsigns select_hunk<CR>')
       end,
@@ -353,14 +353,14 @@ require('lazy').setup({
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader><leader>', builtin.find_files, { desc = '[ ] Search Files' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-      vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+      vim.keymap.set('n', '<leader>sf', builtin.live_grep, { desc = '[S]earch by [F]uzzy' })
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-      vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      vim.keymap.set('n', '<leader>,', builtin.buffers, { desc = 'Find existing buffers' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
@@ -370,15 +370,6 @@ require('lazy').setup({
           previewer = false,
         })
       end, { desc = '[/] Fuzzily search in current buffer' })
-
-      -- Also possible to pass additional configuration options.
-      --  See `:help telescope.builtin.live_grep()` for information about particular keys
-      vim.keymap.set('n', '<leader>s/', function()
-        builtin.live_grep {
-          grep_open_files = true,
-          prompt_title = 'Live Grep in Open Files',
-        }
-      end, { desc = '[S]earch [/] in Open Files' })
 
       -- Shortcut for searching your neovim configuration files
       vim.keymap.set('n', '<leader>sn', function()

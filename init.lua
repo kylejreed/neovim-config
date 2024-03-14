@@ -72,6 +72,8 @@ local map = function(mode, keys, func, opts)
   vim.keymap.set(mode, keys, func, opts)
 end
 
+map('n', '<leader>x', ':bd! <CR>')
+map('n', '<leader>|', '<C-w> <C-v>', { silent = true })
 map('n', '<F5>', ':e! <CR>', { silent = true })
 map('n', '<leader>gg', ':LazyGit <CR>')
 map('n', 'H', '^')
@@ -189,6 +191,55 @@ require('lazy').setup({
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
       },
+      on_attach = function()
+        local gs = package.loaded.gitsigns
+        -- Navigation
+        map('n', ']c', function()
+          if vim.wo.diff then
+            return ']c'
+          end
+          vim.schedule(function()
+            gs.next_hunk()
+          end)
+          return '<Ignore>'
+        end, { expr = true, desc = 'Next Hunk' })
+
+        map('n', '[c', function()
+          if vim.wo.diff then
+            return '[c'
+          end
+          vim.schedule(function()
+            gs.prev_hunk()
+          end)
+          return '<Ignore>'
+        end, { expr = true, desc = 'Previous Hunk' })
+
+        -- Actions
+        map('n', '<leader>ghs', gs.stage_hunk)
+        map('n', '<leader>ghr', gs.reset_hunk)
+        map('v', '<leader>ghs', function()
+          gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
+        end)
+        map('v', '<leader>ghr', function()
+          gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
+        end)
+        map('n', '<leader>ghS', gs.stage_buffer)
+        map('n', '<leader>ghu', gs.undo_stage_hunk)
+        map('n', '<leader>ghR', gs.reset_buffer)
+        map('n', '<leader>ghp', gs.preview_hunk)
+        map('n', '<leader>ghb', function()
+          gs.blame_line { full = true }
+        end)
+        map('n', '<leader>gtb', gs.toggle_current_line_blame)
+        map('n', '<leader>ghd', gs.diffthis)
+        map('n', '<leader>ghD', function()
+          gs.diffthis '~'
+        end)
+        map('n', '<leader>gtd', gs.toggle_deleted)
+
+        -- Text object
+        map({ 'o', 'x' }, 'gih', ':<C-U>Gitsigns select_hunk<CR>')
+      end,
     },
   },
 
@@ -470,9 +521,9 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- clangd = {},
-        gopls = {},
+        -- gopls = {},
         pyright = {},
-        rust_analyzer = {},
+        -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -635,12 +686,12 @@ require('lazy').setup({
           --
           -- <c-l> will move you to the right of each of the expansion locations.
           -- <c-h> is similar, except moving you backwards.
-          ['<C-l>'] = cmp.mapping(function()
+          ['<C-S-l>'] = cmp.mapping(function()
             if luasnip.expand_or_locally_jumpable() then
               luasnip.expand_or_jump()
             end
           end, { 'i', 's' }),
-          ['<C-h>'] = cmp.mapping(function()
+          ['<C-S-h>'] = cmp.mapping(function()
             if luasnip.locally_jumpable(-1) then
               luasnip.jump(-1)
             end

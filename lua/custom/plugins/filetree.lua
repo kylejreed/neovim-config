@@ -18,7 +18,7 @@ return {
     }
 
     vim.keymap.set('n', '<C-n>', function()
-      require('neo-tree.command').execute { toggle = true, reveal = true }
+      require('neo-tree.command').execute { toggle = true, reveal = true, dir = vim.loop.cwd() }
     end, { desc = 'Show diagnostic [E]rror messages' })
   end,
 }

@@ -10,6 +10,9 @@ return {
           enable = true,
           filetypes = { 'javascriptreact', 'typescriptreact' },
         },
+        tsserver_format_options = {
+          semicolons = 'insert',
+        },
       },
     },
     config = function(_, opts)

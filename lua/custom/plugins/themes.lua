@@ -8,7 +8,7 @@ return {
   {
     'kylejreed/poimandres.nvim',
     priority = 1000,
-    lazy = false,
+    lazy = true,
     config = function()
       require('poimandres').setup {}
     end,
@@ -21,15 +21,25 @@ return {
     'catppuccin/nvim',
     name = 'catppuccin',
     priority = 1000,
-    init = function()
-      vim.cmd.colorscheme 'catppuccin-macchiato'
-      vim.cmd.hi 'Comment gui=none'
-    end,
   },
   {
     'AlexvZyl/nordic.nvim',
     lazy = false,
     priority = 1000,
+    config = function()
+      local palette = require 'nordic.colors'
+      require('nordic').setup {
+        override = {
+          Visual = {
+            bg = palette.blue,
+          },
+        },
+      }
+    end,
+    init = function()
+      vim.cmd.colorscheme 'nordic'
+      vim.cmd.hi 'Comment gui=none'
+    end,
   },
   {
     'rebelot/kanagawa.nvim',

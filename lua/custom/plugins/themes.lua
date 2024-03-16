@@ -2,16 +2,8 @@ return {
   {
     'zaldih/themery.nvim',
     opts = {
-      themes = { 'tokyonight-night', 'catppuccin-frappe', 'catppuccin-macchiato', 'catppuccin-mocha', 'nordic', 'kanagawa', 'poimandres' },
+      themes = { 'tokyonight-night', 'catppuccin-frappe', 'catppuccin-macchiato', 'catppuccin-mocha', 'nordic' },
     },
-  },
-  {
-    'kylejreed/poimandres.nvim',
-    priority = 1000,
-    lazy = true,
-    config = function()
-      require('poimandres').setup {}
-    end,
   },
   {
     'folke/tokyonight.nvim',
@@ -40,10 +32,5 @@ return {
       vim.cmd.colorscheme 'nordic'
       vim.cmd.hi 'Comment gui=none'
     end,
-  },
-  {
-    'rebelot/kanagawa.nvim',
-    lazy = false,
-    priority = 1000,
   },
 }

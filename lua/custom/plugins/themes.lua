@@ -23,7 +23,7 @@ return {
       require('nordic').setup {
         override = {
           Visual = {
-            bg = palette.blue,
+            bg = palette.blue0,
           },
         },
       }

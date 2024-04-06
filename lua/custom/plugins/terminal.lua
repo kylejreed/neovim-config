@@ -26,6 +26,13 @@ return {
       vim.keymap.set('t', '<C-/>', function()
         require('nvterm.terminal').toggle 'float'
       end)
+
+      vim.keymap.set('n', '<C-?>', function()
+        require('nvterm.terminal').toggle 'horizontal'
+      end)
+      vim.keymap.set('t', '<C-?>', function()
+        require('nvterm.terminal').toggle 'horizontal'
+      end)
     end,
   },
 }

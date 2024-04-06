@@ -15,9 +15,7 @@ vim.opt.shiftwidth = 4
 
 -- Make line numbers default
 vim.opt.number = true
--- You can also add relative line numbers, for help with jumping.
---  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -79,6 +77,7 @@ map('n', '<leader>gg', ':LazyGit <CR>')
 map('n', 'H', '^')
 map('n', 'L', '$')
 map('n', '<C-s>', ':w! <CR>')
+map('n', '<C-a>', 'ggv$G$')
 map('i', '<C-s>', '<Esc> :wa <CR>')
 map('i', '<C-h>', '<Left>', { silent = true, noremap = true })
 map('i', '<C-l>', '<Right>', { silent = true, noremap = true })

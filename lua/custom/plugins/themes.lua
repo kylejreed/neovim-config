@@ -13,6 +13,9 @@ return {
     'catppuccin/nvim',
     name = 'catppuccin',
     priority = 1000,
+    init = function()
+      vim.cmd.colorscheme 'catppuccin-macchiato'
+    end,
   },
   {
     'AlexvZyl/nordic.nvim',
@@ -27,10 +30,6 @@ return {
           },
         },
       }
-    end,
-    init = function()
-      vim.cmd.colorscheme 'nordic'
-      vim.cmd.hi 'Comment gui=none'
     end,
   },
 }

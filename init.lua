@@ -95,7 +95,7 @@ map('i', 'jk', '<Esc>', { silent = true })
 map('n', '~', ':Inspect <CR>', { desc = 'Inspect' })
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
-vim.opt.hlsearch = true
+vim.opt.hlsearch = false
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
@@ -463,7 +463,16 @@ require('lazy').setup({
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
-          map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+          map('<leader>ca', function()
+            vim.lsp.buf.code_action {
+              context = {
+                only = { 'source', 'quickfix' },
+              },
+              apply = true,
+            }
+          end, '[C]ode [A]ction (quick)')
+
+          map('<leader>cA', vim.lsp.buf.code_action, '[C]ode [A]ction (all)')
 
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap
@@ -700,7 +709,15 @@ require('lazy').setup({
             hl_group = 'CmpGhostText',
           },
         },
-        sorting = defaults.sorting,
+        sorting = {
+          comparators = {
+            cmp.config.compare.offset,
+            cmp.config.compare.exact,
+            cmp.config.compare.score,
+            cmp.config.compare.recently_used,
+            cmp.config.compare.kind,
+          },
+        },
       }
     end,
   },

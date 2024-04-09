@@ -10,6 +10,11 @@ return {
           enable = true,
           filetypes = { 'javascriptreact', 'typescriptreact' },
         },
+        tsserver_file_preferences = {
+          includeCompletionsForModuleExports = true,
+          includeCompletionsForImportStatements = true,
+          quotePreference = 'double',
+        },
         tsserver_format_options = {
           semicolons = 'insert',
         },

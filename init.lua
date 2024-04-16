@@ -96,8 +96,7 @@ map('i', 'jk', '<Esc>', { silent = true })
 map('n', '~', ':Inspect <CR>', { desc = 'Inspect' })
 map('n', '<leader><Tab>n', ':tabnew <CR>', { silent = true, desc = 'Open new tab' })
 map('n', '<leader><Tab>x', ':tabclose <CR>', { silent = true, desc = 'Close tab' })
-map('n', '<Tab>', ':tabn <CR>', { silent = true, desc = 'Tab Next' })
-map('n', '<S-Tab>', ':tabp <CR>', { silent = true, desc = 'Tab Previous' })
+map('n', '<leader><Tab><Tab>', ':tabn <CR>', { silent = true, desc = 'Tab Next' })
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = false

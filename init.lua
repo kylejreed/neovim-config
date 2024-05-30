@@ -67,6 +67,10 @@ vim.opt.scrolloff = 10
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 local map = function(mode, keys, func, opts)
+  -- dont bind leader stuff for vscode
+  if vim.g.vscode and string.find(keys, '<leader>') then
+    return
+  end
   vim.keymap.set(mode, keys, func, opts)
 end
 
@@ -143,12 +147,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
   callback = function()
     vim.highlight.on_yank()
-  end,
-})
-
-vim.api.nvim_create_autocmd('BufWritePre', {
-  callback = function()
-    vim.lsp.buf.format()
   end,
 })
 
@@ -534,6 +532,7 @@ require('lazy').setup({
         -- gopls = {},
         tailwindcss = {},
         pyright = {},
+        -- gleam = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --

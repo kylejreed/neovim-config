@@ -20,19 +20,11 @@ return {
         -- for configuration options
       }
     end,
-
-    -- optionally set the colorscheme within lazy config
-    init = function()
-      vim.cmd 'colorscheme poimandres'
-    end,
   },
   {
     'catppuccin/nvim',
     name = 'catppuccin',
     priority = 1000,
-    init = function()
-      -- vim.cmd.colorscheme 'catppuccin-macchiato'
-    end,
   },
   {
     'AlexvZyl/nordic.nvim',
@@ -47,6 +39,9 @@ return {
           },
         },
       }
+    end,
+    init = function()
+      vim.cmd.colorscheme 'nordic'
     end,
   },
 }
